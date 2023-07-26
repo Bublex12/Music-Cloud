@@ -2,6 +2,9 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
+from database import get_info_sound_in_database
+
+
 
 app = FastAPI()
 
@@ -30,3 +33,12 @@ async def get_audio(filename: str):
     audio_folder = "../static/audio"
     audio_path = os.path.join(audio_folder, filename)
     return audio_path
+
+
+@app.get("/audio/info/{filename}")
+async def get_info_audio(filename: str):
+    audio_folder = "../static/audio"
+
+    id_sound = str(filename.split('.')[0])
+
+    return get_info_sound_in_database(id_sound)

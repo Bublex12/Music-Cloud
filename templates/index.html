@@ -1,16 +1,38 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-    <title>Audio Example</title>
+  <title>Моя музыка</title>
 </head>
 <body>
-    <h1>Audio Example</h1>
-    {% for audio_file in audio_files %}
-    <audio controls>
+
+  <header>
+    <h1>Моя музыка</h1>
+  </header>
+
+  <main>
+    <div class="albums">
+      <h2>Список песен</h2>
+
+      {% for audio_file in audio_files %}
+
+      <div class="song">
+        <!-- также другие песни -->
+
+      <div class="song__title" >{{audio_file.split('.')[0]}}</div>
+        <div class="song__title" >s</div>
+    <audio controls volume="0.2">
         <source src="{{ url_for('get_audio', filename=audio_file) }}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <br>
+      </div>
     {% endfor %}
+
+
+
+    </div>
+  </main>
+
 </body>
 </html>
