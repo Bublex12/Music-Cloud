@@ -9,30 +9,51 @@
   <header>
     <h1>Моя музыка</h1>
   </header>
+<!--  <H1>РИТА ЛЮБИМАЯ ♥</H1>-->
 
   <main>
+
     <div class="albums">
       <h2>Список песен</h2>
 
-      {% for audio_file in audio_files %}
+      <div class="container"><div class="row">
 
-      <div class="song">
-        <!-- также другие песни -->
+<div class="col-lg-6 col-lg-offset-3">
 
-      <div class="song__title" >{{audio_file.split('.')[0]}}</div>
-        <div class="song__title" >s</div>
-    <audio controls volume="0.2">
-        <source src="{{ url_for('get_audio', filename=audio_file) }}" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <br>
-      </div>
+{% for audio_file in audio_files %}
+    {% for sound_info in sound_info_list %}
+
+        {% if audio_file in sound_info
+            for sound in sound_info %}
+                <div>Исполнитель - {{sound[2]}}</div>
+                <div>Трек - {{sound[1]}}</div>
+                <div>Альбом - {{sound[3]}}</div>
+        {% endfor %}
     {% endfor %}
+        <div class="song__title" >{{audio_file.split('.')[0]}}</div>
+
+ <audio preload="auto" controls>
+ <source src="{{ url_for('get_audio', filename=audio_file) }}" />
+ </audio>
+  {% endfor %}
 
 
-
-    </div>
+</div>
+      </div>
+          </body>
   </main>
 
-</body>
+
 </html>
+
+
+<link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
+<link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/audio-touch/audio-touch.css" />
+<script type="text/javascript" src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script src="https://bootstraptema.ru/plugins/2015/audio-touch/audio-touch.js"></script>
+ <script>
+ $( function()
+ {
+ $( 'audio' ).audioPlayer();
+ });
+ </script>

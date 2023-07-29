@@ -25,7 +25,12 @@ templates = Jinja2Templates(directory=os.path.join(os.path.dirname(os.path.abspa
 @app.get("/audio", response_class=HTMLResponse)
 async def get_all_audio(request: Request):
     audio_files = get_audio_files()
-    return templates.TemplateResponse("index.html", {"request": request, "audio_files": audio_files})
+    info_sound_list = []
+    for audio_file in audio_files:
+        id_sound = str(audio_file.split('.')[0])
+        info_sound_list.append(get_info_sound_in_database(id_sound))
+    print(info_sound_list)
+    return templates.TemplateResponse("index.html", {"request": request, "audio_files": audio_files, "sound_info_list": info_sound_list})
 
 
 @app.get("/audio/{filename}", response_class=FileResponse)
