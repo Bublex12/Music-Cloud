@@ -39,11 +39,10 @@ async def get_audio(filename: str):
     audio_path = os.path.join(audio_folder, filename)
     return audio_path
 
+@app.get("/audio/img/{filename}", response_class=FileResponse)
+async def get_img(filename: str):
+    img_folder = "../static/img"
+    img_path = os.path.join(img_folder, filename+'.jpg')
+    return img_path
 
-@app.get("/audio/info/{filename}")
-async def get_info_audio(filename: str):
-    audio_folder = "../static/audio"
 
-    id_sound = str(filename.split('.')[0])
-
-    return get_info_sound_in_database(id_sound)

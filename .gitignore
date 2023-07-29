@@ -1,4 +1,5 @@
 .idea/
 venv/
 static/audio/
+static/img/
 app/.env

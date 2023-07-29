@@ -20,16 +20,33 @@
 
 <div class="col-lg-6 col-lg-offset-3">
 
-{% for audio_file in audio_files %}
-    {% for sound_info in sound_info_list %}
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Исполнитель</th>
+      <th scope="col">Трек</th>
+      <th scope="col">Альбом</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for sound_info in sound_info_list %}
+        {% for sound in sound_info %}
+    <tr>
+      <th scope="row">{{sound[2]}}</th>
+      <td>{{sound[1]}}</td>
+      <td>{{sound[3]}}</td>
+      <td><img src="{{ url_for('get_img', filename=sound[0]) }}" width="50" height="50"></td>
+    </tr>
+  {% endfor %}
 
-        {% if audio_file in sound_info
-            for sound in sound_info %}
-                <div>Исполнитель - {{sound[2]}}</div>
-                <div>Трек - {{sound[1]}}</div>
-                <div>Альбом - {{sound[3]}}</div>
-        {% endfor %}
     {% endfor %}
+  </tbody>
+</table>
+
+{% for audio_file in audio_files %}
+
+
         <div class="song__title" >{{audio_file.split('.')[0]}}</div>
 
  <audio preload="auto" controls>
