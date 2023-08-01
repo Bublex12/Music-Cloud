@@ -3,12 +3,19 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
 from database import get_info_sound_in_database
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+
 
 
 
 app = FastAPI()
 
-
+app.mount(
+    "/static",
+    StaticFiles(directory=Path(__file__).parent.parent.absolute() / "static"),
+    name="static",
+)
 # Получить список всех аудиофайлов в папке audio
 def get_audio_files():
     audio_folder = "../static/audio"

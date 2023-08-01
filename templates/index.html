@@ -1,76 +1,73 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
   <title>Моя музыка</title>
 </head>
-<body>
-
-  <header>
-    <h1>Моя музыка</h1>
-  </header>
+<header>
+  <h1>Моя музыка</h1>
+</header>
 <!--  <H1>РИТА ЛЮБИМАЯ ♥</H1>-->
 
-  <main>
+<body>
 
-    <div class="albums">
-      <h2>Список песен</h2>
 
-      <div class="container"><div class="row">
 
-<div class="col-lg-6 col-lg-offset-3">
+  <div class="playlist">
+    <h2>Список песен</h2>
 
-            <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Исполнитель</th>
-      <th scope="col">Трек</th>
-      <th scope="col">Альбом</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-   {% for sound_info in sound_info_list %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Исполнитель</th>
+          <th scope="col">Трек</th>
+          <th scope="col">Альбом</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for sound_info in sound_info_list %}
         {% for sound in sound_info %}
-    <tr>
-      <th scope="row">{{sound[2]}}</th>
-      <td>{{sound[1]}}</td>
-      <td>{{sound[3]}}</td>
-      <td><img src="{{ url_for('get_img', filename=sound[0]) }}" width="50" height="50"></td>
-    </tr>
-  {% endfor %}
+        <tr>
+          <td><button id="play_button" data-track-id = "{{sound[0]}}"><img src="{{ url_for('get_img', filename=sound[0]) }}" width="50" height="50"></button></td>
+          <th scope="row">{{sound[2]}}</th>
+          <td>{{sound[1]}}</td>
+          <td>{{sound[3]}}</td>
+          
+        </tr>
 
-    {% endfor %}
-  </tbody>
-</table>
-
-{% for audio_file in audio_files %}
-
-
-        <div class="song__title" >{{audio_file.split('.')[0]}}</div>
-
- <audio preload="auto" controls>
- <source src="{{ url_for('get_audio', filename=audio_file) }}" />
- </audio>
-  {% endfor %}
+        {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 
-</div>
-      </div>
-          </body>
-  </main>
+  <div class="audio-player">
+    <audio id="player" preload="auto" controls>
+<!--      <source src="{{ url_for('get_audio', filename='115063213.mp3') }}" />-->
+    </audio>
+  </div>
+
+
+
+<!--{% for audio_file in audio_files %}-->
+
+
+<!--        <div class="song__title" >{{audio_file.split('.')[0]}}</div>-->
+
+<!-- <audio preload="auto" controls>-->
+<!-- <source src="{{ url_for('get_audio', filename=audio_file) }}" />-->
+<!-- </audio>-->
+<!--  {% endfor %}-->
+
+
 
 
 </html>
 
+<script src="{{ url_for('static', path='/js/script.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', path='/css/main.css') }}">
 
-<link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
-<link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/audio-touch/audio-touch.css" />
-<script type="text/javascript" src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
-<script src="https://bootstraptema.ru/plugins/2015/audio-touch/audio-touch.js"></script>
- <script>
- $( function()
- {
- $( 'audio' ).audioPlayer();
- });
- </script>
